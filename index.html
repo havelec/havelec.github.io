@@ -14,7 +14,7 @@
     x.onreadystatechange = function () {
       var git = JSON.parse(this.responseText);
       var count = git.tree.length;
-      var rand = Math.floor(Math.random() * (count + 1));
+      var rand = Math.floor(Math.random() * (count));
       // change the img source
       var havelec = document.querySelector("#havelec");
       havelec.src = "imgs/" + git.tree[rand].path;
