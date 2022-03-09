@@ -9,9 +9,17 @@
   <img id="havelec" style="width: 100%; height: 100%;">
   <script>
     // get list of images from dir tree: github
-    
-    // change the img source
-    var havelec = document.querySelector("#havelec");
-    havelec.src = "";
+    // url: https://api.github.com/repos/havelec/havelec.github.io/git/trees/415a50de134257fbc86e4bf3f2ebde21e14b9c40
+    var x = new XMLHttpRequest();
+    x.onreadystatechange = function () {
+      var git = JSON.parse(this.responseText);
+      var count = git.tree.length;
+      var rand = Math.floor(Math.random() * (count + 1));
+      // change the img source
+      var havelec = document.querySelector("#havelec");
+      havelec.src = "imgs/" + git.tree[rand].path;
+    };
+    x.open("GET", "https://api.github.com/repos/havelec/havelec.github.io/git/trees/415a50de134257fbc86e4bf3f2ebde21e14b9c40", true);
+    x.send();
   </script>
 </body>
