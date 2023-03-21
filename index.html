@@ -8,9 +8,11 @@
 <body style="background-color: black; display: flex; justify-content: center; height: 100vh; margin: 0 8px;">
   <img id="havelec">
   <script>
-    var x = new XMLHttpRequest();
-    x.onreadystatechange = function () {
-      if (x.readyState === 4) {
+    
+        function loadRandomImage() {
+        var x = new XMLHttpRequest();
+        x.onreadystatechange = function () {
+        if (x.readyState === 4) {
         var git = JSON.parse(this.responseText);
         git.tree = git.tree.filter(h => h.path.toLowerCase().startsWith("imgs/"));
         var count = git.tree.length;
@@ -18,9 +20,17 @@
         // change the img source
         var havelec = document.querySelector("#havelec");
         havelec.src = git.tree[rand].path;
-      }
+    }
     };
-    x.open("GET", "https://api.github.com/repos/havelec/havelec.github.io/git/trees/main?recursive=1", true);
-    x.send();
+        x.open("GET", "https://api.github.com/repos/havelec/havelec.github.io/git/trees/main?recursive=1", true);
+        x.send();
+    }
+
+        // load the first random image
+        loadRandomImage();
+
+        // reload a new random image after every 2 seconds
+        setInterval(loadRandomImage, 2000);
+
   </script>
 </body>
